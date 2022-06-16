@@ -1,6 +1,6 @@
 ## Demo for Konnect Mockup
 
-Schema Design Philosophy
+**Schema Design Philosophy**
 
 Service Table <br />
 id: int auto inc <br />
@@ -26,7 +26,7 @@ A drawback for this design is when two users try to update on the same version, 
 2. lock the table/backend/frontend when someone if trying to modify the version to disallow version divergence
 
 
-Controller Design Philosophy
+**Controller Design Philosophy**
 
 APIs are designed in a way to be as flexible as possible for maximum code reusability. API documentation is needed to guide API consumers. Http status codes are used to specify return status but due to time limitation, it's not fully implemented yet. 
 
@@ -42,6 +42,6 @@ Delete /services/:id -> delete and specific services and cascade the deletion of
 Frontend should prompt the user for deletion confirmation as this action is irreversible. 
 
 
-App Structure Design Philosophy
+**App Structure Design Philosophy**
 
 As this is only for demo purposes, I kept the the project structure relatively simple with entities bundled right into the AppService and AppController. However my general design philosophy is structure things as neat as possible but I always to the keep the complexity of schema or business logic to a level. Once the complexity grows too much, it's time to split the app into multiple services in order to maintain the complexity of the whole app in a manageable fashion. 
