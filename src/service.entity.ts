@@ -30,6 +30,6 @@ export class Service {
 }
 
 export type serviceT = {
-  title: string;
-  description?: string;
+  title: string
+  description?: string
 }

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, ParseIntPipe, Query, Put } from '@nestjs/common'
 import { AppService } from './app.service'
-import { Service, serviceT } from './service.entity';
+import { Service, serviceT } from './service.entity'
 
 @Controller('services')
 export class AppController {
