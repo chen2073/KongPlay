@@ -14,15 +14,11 @@ export class AppService {
   ) {}
 
   async create(newService: serviceT): Promise<void> {
-    try{
-      await this.ServicesRepository
-      .createQueryBuilder('service')
-      .insert()
-      .values(newService)
-      .execute()
-    } catch (error) {
-      console.log(error)
-    }
+    await this.ServicesRepository
+    .createQueryBuilder('service')
+    .insert()
+    .values(newService)
+    .execute()
   }
 
   async findAll({like='', sortBy='updateDate', limit=12, offset=0}, order: 'ASC' | 'DESC'='DESC'): Promise<Service[]> {
@@ -57,39 +53,32 @@ export class AppService {
     return this.ServicesRepository
       .createQueryBuilder('service')
       .select(['service.id', 'service.title', 'service.description', 'service.updateDate'])
-      .leftJoinAndSelect("service.versions", "versions")
+      .leftJoin("service.versions", "versions")
+      .addSelect(['versions.version_number', 'versions.createDate'])
       .where('service.id = :id', {id: id})
       .getOne()
   }
 
   async update(id: number, newService: serviceT, version_number: string=null): Promise<void> {
-    try{
-      await this.ServicesRepository
+    await this.ServicesRepository
       .createQueryBuilder('service')
       .update(Service)
       .set({...newService})
       .set({updateDate: new Date()})
       .where('service.id = :id', {id: id})
       .execute()
-    } catch (error) {
-      console.log(error)
-    }
 
     if (version_number !== null && version_number !== undefined &&  version_number !== '') {
       await this.VersionRepository
         .createQueryBuilder('version')
         .insert()
-        .values({service_id: id, version_number: version_number})
+        .values({servicesId: id, version_number: version_number})
         .execute()
     }
   }
 
   async remove(id: string): Promise<void> {
-    try{
-      await this.ServicesRepository
-        .delete(id)
-    } catch (error) {
-      console.log(error)
-    }
+    await this.ServicesRepository
+      .delete(id)
   }
 }

@@ -6,11 +6,6 @@ import { Service, serviceT } from './service.entity';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Post()
-  create(@Body() newService: serviceT): Promise<void> {
-    return this.appService.create(newService)
-  }
-
   @Get()
   findAll(@Query() query): Promise<Service[]> {
     const {like, sortBy, limit, offset, order} = query
@@ -20,6 +15,11 @@ export class AppController {
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number): Promise<Service> {
     return this.appService.findOne(id)
+  }
+
+  @Post()
+  create(@Body() newService: serviceT): Promise<void> {
+    return this.appService.create(newService)
   }
 
   @Put(':id')

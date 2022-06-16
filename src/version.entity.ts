@@ -20,4 +20,7 @@ export class Version {
 
     @ManyToOne(() => Service, (service) => service.versions)
     services: Service
+
+    @Column("int", { nullable: false })
+    servicesId: number
 }
