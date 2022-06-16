@@ -13,12 +13,14 @@ export class AppService {
     private readonly VersionRepository: Repository<Version>,
   ) {}
 
-  async create(newService: serviceT): Promise<void> {
-    await this.ServicesRepository
+  async create(newService: serviceT): Promise<number> {
+    const inserted = await this.ServicesRepository
     .createQueryBuilder('service')
     .insert()
     .values(newService)
     .execute()
+
+    return inserted.raw
   }
 
   async findAll({like='', sortBy='updateDate', limit=12, offset=0}, order: 'ASC' | 'DESC'='DESC'): Promise<Service[]> {

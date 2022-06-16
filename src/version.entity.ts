@@ -18,7 +18,7 @@ export class Version {
     @CreateDateColumn()
     createDate: Date
 
-    @ManyToOne(() => Service, (service) => service.versions)
+    @ManyToOne(() => Service, (service) => service.versions, { onDelete: 'CASCADE' })
     services: Service
 
     @Column("int", { nullable: false })

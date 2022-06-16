@@ -18,7 +18,7 @@ export class AppController {
   }
 
   @Post()
-  create(@Body() newService: serviceT): Promise<void> {
+  create(@Body() newService: serviceT): Promise<number> {
     return this.appService.create(newService)
   }
 

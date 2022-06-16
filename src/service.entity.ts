@@ -25,7 +25,7 @@ export class Service {
     @CreateDateColumn()
     createDate: Date
 
-    @OneToMany(() => Version, (version) => version.services)
+    @OneToMany(() => Version, (version) => version.services, { cascade: true })
     versions: Version[]
 }
 
